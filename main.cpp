@@ -1,8 +1,9 @@
 #include <iostream>
+#include "utilities.h"
 
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
+    filereader("F:\\simplextest");
     return 0;
 }

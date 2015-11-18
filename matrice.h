@@ -5,7 +5,6 @@
 #ifndef SIMPLEX_MATRICE_H
 #define SIMPLEX_MATRICE_H
 
-
 class matrice {
     
 };

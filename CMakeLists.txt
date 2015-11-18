@@ -3,5 +3,5 @@ project(simplex)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp utilities.h matrice.cpp matrice.h)
+set(SOURCE_FILES main.cpp utilities.cpp utilities.h matrice.cpp matrice.h)
 add_executable(simplex ${SOURCE_FILES})

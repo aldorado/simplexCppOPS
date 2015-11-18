@@ -1,5 +1,6 @@
 #include <iostream>
 #include "utilities.h"
+#include "simplex.h"
 
 using namespace std;
 

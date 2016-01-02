@@ -1,7 +1,6 @@
 //
 // Created by Al Dorado on 15.11.15.
 //
-#include <iostream>
 #include "utilities.h"
 
 void filereader(string pathToFile) {

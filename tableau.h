@@ -8,20 +8,21 @@
 
 class Tableau {
 private:
-    int n;
-    int k;
-    double *b;
-    double *c;
-    double **A;
+    double **tableauArray;
+    int tableauColumns;
+    int tableauRows;
     bool optimum = false;
 
-    double& findPivot();
+    int pivotColumn;
+    int pivotRow;
+
     bool checkOptimum();
-    
     Tableau() {}
+
 public:
     Tableau(int n, int k, double *b, double *c, double **A);
 
+    void findPivot();
     bool getOptimum();
     void simplexStep();
 };

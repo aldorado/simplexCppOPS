@@ -72,12 +72,12 @@ int main() {
                     cout << endl << endl;
 
                     double* solution = lpsolve( n, c, k, matrice, b);
-
+/*
                     cout << endl << "LOESUNGSWERTE:" << endl;
                     for(int i = 0; i < n; ++i)
                         cout << "x" << i+1 << " = " << solution[i] << endl;
                     cout << "Optimaler ZF-Wert = " << solution[n] << endl;
-
+*/
                 }
                 else {
                     cout << "Filereader Exception: Datei gibt es nicht!" << endl;

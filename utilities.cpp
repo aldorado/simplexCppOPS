@@ -1,6 +1,7 @@
 //
 // Created by Al Dorado on 15.11.15.
 //
+#include <stdlib.h>
 #include "utilities.h"
 
 Tableau filereader(string pathToFile) {
@@ -49,6 +50,7 @@ Tableau filereader(string pathToFile) {
         return Tableau(n , c, k, matrice, b);
 
     } catch (...) {
-        cout << "Filereader Exception";
+        cout << "Filereader Exception" << endl;
+        exit (EXIT_FAILURE);
     }
 }

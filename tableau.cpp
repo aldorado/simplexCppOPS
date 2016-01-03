@@ -92,9 +92,9 @@ double* Tableau::solution() {
     for(int i = 0; i < n+1; ++i)
         solution[i] = 0;
 
-    for(int i = 0; i < tableauRows - 1; ++i)
-        if(x[i] < n)
-            solution[x[i]] = tableauArray[i+1][tableauColumns-1];
+    for(int i = 1; i < tableauRows; ++i)
+        if(x[i-1] < n)
+            solution[x[i-1]] = tableauArray[i][tableauColumns-1];
 
     solution[n] = tableauArray[0][tableauColumns-1];
 

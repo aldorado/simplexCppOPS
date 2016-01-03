@@ -25,6 +25,9 @@ private:
 public:
     Tableau(int n, double* c, int k, double** A, double* b);
 
+    int getN() { return tableauColumns - tableauRows; }
+    int getK() { return tableauRows - 1; }
+
     void findPivot();
     void simplexStep();
     bool checkOptimum();

@@ -3,11 +3,12 @@
 //
 #include <iostream>
 #include <fstream>
+#include "tableau.h"
 #ifndef SIMPLEX_UTILITIES_H
 #define SIMPLEX_UTILITIES_H
 
 using namespace std;
 
-void filereader(string pathToFile);
+Tableau filereader(string pathToFile);
 
 #endif //SIMPLEX_UTILITIES_H

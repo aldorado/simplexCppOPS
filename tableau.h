@@ -1,30 +1,36 @@
 //
 // Created by AnuarYesid on 02.01.2016.
 //
-
+#include <iostream>
 #ifndef SIMPLEX_TABLEAU_H
 #define SIMPLEX_TABLEAU_H
 
+using namespace std;
 
 class Tableau {
 private:
-    double **tableauArray;
+    double** tableauArray;
     int tableauColumns;
     int tableauRows;
     bool optimum = false;
 
     int pivotColumn;
     int pivotRow;
+    double pivotElement;
 
-    bool checkOptimum();
+    int* x;
+
     Tableau() {}
 
 public:
-    Tableau(int n, int k, double *b, double *c, double **A);
+    Tableau(int n, double* c, int k, double** A, double* b);
 
     void findPivot();
-    bool getOptimum();
     void simplexStep();
+    bool checkOptimum();
+
+    double* solution();
+    void printTableau();
 };
 
 

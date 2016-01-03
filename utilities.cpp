@@ -3,7 +3,7 @@
 //
 #include "utilities.h"
 
-void filereader(string pathToFile) {
+Tableau filereader(string pathToFile) {
 
     try {
 
@@ -43,6 +43,10 @@ void filereader(string pathToFile) {
 
         for (int l = 0; l < n; ++l)
             cout << " " << c[l];
+
+        cout << endl << endl;
+
+        return Tableau(n , c, k, matrice, b);
 
     } catch (...) {
         cout << "Filereader Exception";

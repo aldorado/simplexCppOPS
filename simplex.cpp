@@ -16,15 +16,3 @@ double* lpsolve(int n, double* c, int k, double** A, double* b) {
 
     return t.solution();
 }
-
-double* lpsolve(Tableau t) {
-    t.printTableau();
-
-    while (!t.checkOptimum()) {
-        t.findPivot();
-        t.simplexStep();
-        t.printTableau();
-    }
-
-    return t.solution();
-}

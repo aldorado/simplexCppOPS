@@ -24,7 +24,7 @@ private:
 
 public:
     Tableau(int n, double* c, int k, double** A, double* b);
-
+    ~Tableau();
     int getN() { return tableauColumns - tableauRows; }
     int getK() { return tableauRows - 1; }
 

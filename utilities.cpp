@@ -49,8 +49,7 @@ Tableau filereader(string pathToFile) {
             return Tableau(n , c, k, matrice, b);
         }
         else {
-            cout << "Filereader Exception" << endl;
+            cout << "Filereader Exception: Datei gibt es nicht, Programm wird beendet!" << endl;
             exit (EXIT_FAILURE);
         }
-
 }

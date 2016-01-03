@@ -37,6 +37,14 @@ Tableau::Tableau(int n, double *c, int k, double **A, double *b) {
             tableauArray[i][j] = A[i-1][j];
 }
 
+Tableau::~Tableau() {
+    for (int i = 0; i < tableauRows; ++i)
+        delete tableauArray[i];
+
+    delete tableauArray;
+    delete x;
+}
+
 bool Tableau::checkOptimum() {
 
     double min = 0;
@@ -85,7 +93,6 @@ void Tableau::simplexStep() {
 }
 
 double* Tableau::solution() {
-
     int n = tableauColumns - tableauRows;
     double* solution = new double(n+1);
 
@@ -97,6 +104,9 @@ double* Tableau::solution() {
             solution[x[i-1]] = tableauArray[i][tableauColumns-1];
 
     solution[n] = tableauArray[0][tableauColumns-1];
+
+    for(int i = 0; i < n; ++i)
+        cout << "TEST: " << solution[i] << endl;
 
     return solution;
 }

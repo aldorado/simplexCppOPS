@@ -1,6 +1,6 @@
 //
 // Created by AnuarYesid on 02.01.2016.
-// The Code is explaination enough, if u don't understand it, read stuff
+//
 
 #include "tableau.h"
 
@@ -38,7 +38,10 @@ Tableau::~Tableau() {
 
     delete tableauArray;
 }
-
+/*
+ * Ueberprueft ob das Optimum schon erreicht wurde.
+ * Falls das Optimum nicht erreicht wurde, wird die Pivotspalte festgelegt
+ */
 bool Tableau::checkOptimum() {
 
     double min = 0;
@@ -53,7 +56,9 @@ bool Tableau::checkOptimum() {
 
     return optimum;
 }
-
+/*
+ * Pivotreihe suchen und damit das Pivotelement bestimmen
+ */
 void Tableau::findPivot() {
 
     double min = -1;
@@ -72,6 +77,9 @@ void Tableau::findPivot() {
 
 }
 
+/*
+ * Hier wird ein Simplex Schritt ausgefuehrt, d.h. alle Elemente im Simplextableau werden neu berechnet
+ */
 void Tableau::simplexStep() {
     for (int i = 0; i < tableauRows; ++i)
         for (int j = 0; j < tableauColumns; ++j)
@@ -83,7 +91,9 @@ void Tableau::simplexStep() {
         if (i != pivotRow)
             tableauArray[i][pivotColumn] = 0;
 }
-
+/*
+ * Gibt ein Array mit den Lösungswerten der Basisvariablen und dem optimalen Wert der Zielfunktion aus.
+ */
 double* Tableau::solution() {
     int n = tableauColumns - tableauRows;
     double* solution = new double(n+1);
@@ -108,7 +118,9 @@ double* Tableau::solution() {
 
     return solution;
 }
-
+/*
+ * Gibt das Tableau aus
+ */
 void Tableau::printTableau() {
 
     for (int i = 0; i < tableauRows; ++i) {

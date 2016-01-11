@@ -1,6 +1,6 @@
 //
 // Created by AnuarYesid on 02.01.2016.
-//
+// The Code is explaination enough, if u don't understand it, read stuff
 
 #include "tableau.h"
 
@@ -8,11 +8,6 @@ Tableau::Tableau(int n, double *c, int k, double **A, double *b) {
 
     tableauColumns = n+k+1;
     tableauRows = k+1;
-
-    x = new int[k];
-
-    for (int i = 0; i < k; ++i)
-        x[i] = n+i;
 
     //Erstellen des Tableaus
     tableauArray = new double*[tableauRows];
@@ -42,7 +37,6 @@ Tableau::~Tableau() {
         delete tableauArray[i];
 
     delete tableauArray;
-    delete x;
 }
 
 bool Tableau::checkOptimum() {
@@ -88,8 +82,6 @@ void Tableau::simplexStep() {
     for (int i = 0; i < tableauRows; ++i)
         if (i != pivotRow)
             tableauArray[i][pivotColumn] = 0;
-
-    x[pivotRow-1] = pivotColumn;
 }
 
 double* Tableau::solution() {
@@ -99,14 +91,20 @@ double* Tableau::solution() {
     for(int i = 0; i < n+1; ++i)
         solution[i] = 0;
 
-    for(int i = 1; i < tableauRows; ++i)
-        if(x[i-1] < n)
-            solution[x[i-1]] = tableauArray[i][tableauColumns-1];
-
     solution[n] = tableauArray[0][tableauColumns-1];
 
-    for(int i = 0; i < n; ++i)
-        cout << "TEST: " << solution[i] << endl;
+
+    for (int i = 0; i < n; ++i) {
+        int row = -1;
+        for (int j = 1; j < tableauRows; ++j)
+            if (tableauArray[j][i] == 1 && row == -1)
+                row = j;
+            else if (row > -1)
+                break;
+
+        solution[i] = tableauArray[row][tableauColumns-1];
+    }
+
 
     return solution;
 }
@@ -115,7 +113,7 @@ void Tableau::printTableau() {
 
     for (int i = 0; i < tableauRows; ++i) {
         for (int j = 0; j < tableauColumns; ++j) {
-            cout << " " << tableauArray[i][j];
+            cout << right << setw(6) << setfill(' ') << tableauArray[i][j];
         }
         cout << endl;
     }

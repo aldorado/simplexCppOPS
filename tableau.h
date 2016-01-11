@@ -2,6 +2,7 @@
 // Created by AnuarYesid on 02.01.2016.
 //
 #include <iostream>
+#include <iomanip>
 #ifndef SIMPLEX_TABLEAU_H
 #define SIMPLEX_TABLEAU_H
 

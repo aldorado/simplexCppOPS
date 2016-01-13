@@ -97,6 +97,7 @@ void Tableau::simplexStep() {
 double* Tableau::solution() {
     int n = tableauColumns - tableauRows;
     double* solution = new double(n+1);
+    bool valid_solution = false;
 
     for(int i = 0; i < n+1; ++i)
         solution[i] = 0;
@@ -107,12 +108,19 @@ double* Tableau::solution() {
     for (int i = 0; i < n; ++i) {
         int row = -1;
         for (int j = 1; j < tableauRows; ++j)
-            if (tableauArray[j][i] == 1 && row == -1)
+            if (tableauArray[j][i] == 1 && row == -1) {
                 row = j;
-            else if (row > -1)
+                valid_solution = true;
+            }
+            else if (row > -1 && tableauArray[j][i] != 0) {
+                valid_solution = false;
                 break;
+            }
 
-        solution[i] = tableauArray[row][tableauColumns-1];
+        cout << "" << endl;
+
+        if(valid_solution)
+            solution[i] = tableauArray[row][tableauColumns-1];
     }
 
 

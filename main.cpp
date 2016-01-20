@@ -9,6 +9,7 @@ int main() {
     char eingabe = '#';
     bool beenden = false;
     bool minimum = false;
+    double* solution;
 
     cout << endl
          << "+----------------------------+" << endl;
@@ -50,10 +51,11 @@ int main() {
 
                     for (int i = 0; i < n; ++i)
                         file >> c[i];
-
+                    /* Minimum durch z -> min <=> -z -> max
                     if (minimum)
                         for (int i = 0; i < n; ++i)
                             c[i] *= -1;
+                    */
 
                     //Array zum Speichern der Matrix, n+1 da wir eine zusaetzliche Spalte haben
                     double* b = new double[k];
@@ -66,6 +68,9 @@ int main() {
 
                         file >> b[i];
                     }
+
+                    /*
+                     * Ausgabe der Eingabe
 
                     cout << n << " " << k << endl;
 
@@ -82,7 +87,34 @@ int main() {
 
                     cout << endl << endl;
 
-                    double* solution = lpsolve( n, c, k, matrice, b);
+                    */
+
+                    /* Minimum durch angabe eines primalen Problems der form */
+                    if (minimum) {
+                        double** tempMatrice = new double*[n];
+                        double** oldMatrice = matrice;
+                        for (int i = 0; i < n; ++i) {
+                            tempMatrice[i] = new double[k];
+                            for(int j = 0; j < k; ++j)
+                                tempMatrice[i][j] = oldMatrice[j][i];
+                        }
+                        matrice = tempMatrice;
+
+                        for (int i = 0; i < k; ++i)
+                            delete oldMatrice[i];
+
+                        delete oldMatrice;
+
+                        int temp = n;
+                        n = k;
+                        k = temp;
+                        cout << "TEST1";
+                        solution = lpsolve( n, b, k, matrice, c);
+                        cout << "TEST2";
+
+                    }
+                    else
+                        solution = lpsolve( n, c, k, matrice, b);
 
                     cout << endl << "LOESUNGSWERTE:" << endl;
                     for(int i = 0; i < n; ++i)

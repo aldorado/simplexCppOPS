@@ -13,7 +13,7 @@ double* lpsolve(int n, double* c, int k, double** A, double* b) {
     while (!t.checkOptimum()) {
         t.findPivot();
         t.simplexStep();
-        cout << "Tableau nach Simpexschritt " << counter++ << endl;
+        cout << "Tableau nach Simplexschritt " << counter++ << endl;
         t.printTableau();
     }
 

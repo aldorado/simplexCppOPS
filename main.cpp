@@ -11,6 +11,7 @@ int main() {
     char eingabe = '#'; // variable responsible for the input instructions for the program
     bool beenden = false; // variable responsible for the duration of the program execution
     bool minimum = false; // variable for the specification of what type of optimization problem we want to calculate
+    bool sensitivity = false;
     double* solution; // pointer to the solution array in which the feasible solution is saved
 
     cout << endl
@@ -112,6 +113,7 @@ int main() {
                         k = temp;
 
                         solution = lpsolve( n, b, k, matrice, c);
+                        minimum = false;
                     }
                     else
                         solution = lpsolve( n, c, k, matrice, b); // call of the function that solves the optimization problem
@@ -120,6 +122,13 @@ int main() {
                     for(int i = 0; i < n; ++i)
                         cout << "x" << i+1 << " = " << solution[i] << endl;
                     cout << "Optimaler ZF-Wert = " << solution[n] << endl;
+
+                    cout << "Sensitivitaetsanalyse? (j/n)" << endl;
+                    eingabe = '#';
+                    cin >> eingabe;
+
+                    if (eingabe == 'j' && !minimum)
+                        sensitivity(n,c,k,matrice,b);
 
                     delete c;
                     delete b;

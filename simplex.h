@@ -12,6 +12,6 @@
  * */
 
 double* lpsolve(int n, double *c, int k, double **A, double *b);
-double* lpsolve(Tableau t);
+double* lpsolveWOPrint(int n, double *c, int k, double **A, double *b);
 
 #endif //SIMPLEX_SIMPLEX_H

@@ -1,5 +1,6 @@
 #include "utilities.h"
 #include "simplex.h"
+#include "sensitivity.h"
 
 using namespace std;
 
@@ -34,11 +35,11 @@ int main() {
                 cout << "Geben Sie den Pfad zum Simplex-File an:" << endl;
                 cin >> pathtosimplex; //file path input
 
-                /*cout << "Handelt es sich um ein Minimumproblem? (j/n)" << endl;
+                cout << "Handelt es sich um ein Minimumproblem? (j/n)" << endl;
                 cin >> eingabe;
 
                 if(eingabe == 'j')
-                    minimum = true;*/
+                    minimum = true;
 
                 ifstream file(pathtosimplex); // loading of the text file from the path given by the user
                 // n - Variablen (Spalten) , k - Nebenbedingungen (Reihen)
@@ -109,10 +110,8 @@ int main() {
                         int temp = n;
                         n = k;
                         k = temp;
-                        cout << "TEST1";
-                        solution = lpsolve( n, b, k, matrice, c);
-                        cout << "TEST2";
 
+                        solution = lpsolve( n, b, k, matrice, c);
                     }
                     else
                         solution = lpsolve( n, c, k, matrice, b); // call of the function that solves the optimization problem

@@ -3,5 +3,5 @@ project(simplex)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp utilities.cpp utilities.h simplex.cpp simplex.h tableau.cpp tableau.h)
+set(SOURCE_FILES main.cpp utilities.cpp utilities.h simplex.cpp simplex.h tableau.cpp tableau.h sensitivity.cpp sensitivity.h)
 add_executable(simplex ${SOURCE_FILES})

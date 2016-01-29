@@ -9,11 +9,6 @@ Tableau::Tableau(int n, double *c, int k, double **A, double *b) {
     tableauColumns = n+k+1;
     tableauRows = k+1;
 
-    x = new int[k];
-
-    for (int i = 0; i < k; ++i)
-        x[i] = n+i;
-
     //Erstellen des Tableaus
     tableauArray = new double*[tableauRows];
     for (int i = 0; i < tableauRows; ++i)
@@ -42,9 +37,11 @@ Tableau::~Tableau() {
         delete tableauArray[i];
 
     delete tableauArray;
-    delete x;
 }
-
+/*
+ * Ueberprueft ob das Optimum schon erreicht wurde.
+ * Falls das Optimum nicht erreicht wurde, wird die Pivotspalte festgelegt
+ */
 bool Tableau::checkOptimum() {
 
     double min = 0;
@@ -59,7 +56,9 @@ bool Tableau::checkOptimum() {
 
     return optimum;
 }
-
+/*
+ * Pivotreihe suchen und damit das Pivotelement bestimmen
+ */
 void Tableau::findPivot() {
 
     double min = -1;
@@ -78,6 +77,9 @@ void Tableau::findPivot() {
 
 }
 
+/*
+ * Hier wird ein Simplex Schritt ausgefuehrt, d.h. alle Elemente im Simplextableau werden neu berechnet
+ */
 void Tableau::simplexStep() {
     for (int i = 0; i < tableauRows; ++i)
         for (int j = 0; j < tableauColumns; ++j)
@@ -88,34 +90,50 @@ void Tableau::simplexStep() {
     for (int i = 0; i < tableauRows; ++i)
         if (i != pivotRow)
             tableauArray[i][pivotColumn] = 0;
-
-    x[pivotRow-1] = pivotColumn;
 }
-
+/*
+ * Gibt ein Array mit den Lösungswerten der Basisvariablen und dem optimalen Wert der Zielfunktion aus.
+ */
 double* Tableau::solution() {
     int n = tableauColumns - tableauRows;
     double* solution = new double(n+1);
+    bool valid_solution = false;
 
     for(int i = 0; i < n+1; ++i)
         solution[i] = 0;
-/*
-    for(int i = 1; i < tableauRows; ++i)
-        if(x[i-1] < n)
-            solution[x[i-1]] = tableauArray[i][tableauColumns-1];
 
     solution[n] = tableauArray[0][tableauColumns-1];
-*/
-    for(int i = 0; i < n; ++i)
-        cout << "TEST: " << solution[i] << endl;
+
+
+    for (int i = 0; i < n; ++i) {
+        int row = -1;
+        for (int j = 1; j < tableauRows; ++j)
+            if (tableauArray[j][i] == 1 && row == -1) {
+                row = j;
+                valid_solution = true;
+            }
+            else if (row > -1 && tableauArray[j][i] != 0) {
+                valid_solution = false;
+                break;
+            }
+
+        cout << "" << endl;
+
+        if(valid_solution)
+            solution[i] = tableauArray[row][tableauColumns-1];
+    }
+
 
     return solution;
 }
-
+/*
+ * Gibt das Tableau aus
+ */
 void Tableau::printTableau() {
 
     for (int i = 0; i < tableauRows; ++i) {
         for (int j = 0; j < tableauColumns; ++j) {
-            cout << " " << tableauArray[i][j];
+            cout << right << setw(6) << setfill(' ') << tableauArray[i][j];
         }
         cout << endl;
     }

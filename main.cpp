@@ -8,11 +8,15 @@ int main() {
 
 
     string pathtosimplex;
-    char eingabe = '#'; // variable responsible for the input instructions for the program
-    bool beenden = false; // variable responsible for the duration of the program execution
-    bool minimum = false; // variable for the specification of what type of optimization problem we want to calculate
+    // variable responsible for the input instructions for the program
+    char eingabe = '#';
+    // variable responsible for the duration of the program execution
+    bool beenden = false;
+    // variables for the specification of what type of optimization problem we want to calculate
+    bool minimum = false;
     bool sensitivity = false;
-    double* solution; // pointer to the solution array in which the feasible solution is saved
+    // pointer to the solution array in which the feasible solution is saved
+    double* solution;
 
     cout << endl
          << "+----------------------------+" << endl;
@@ -30,7 +34,8 @@ int main() {
 
         cout << endl;
 
-        switch (eingabe) { // different part of the code is executed according to the input variable
+        // different part of the code is executed according to the input variable
+        switch (eingabe) {
             case '1':
             {
                 cout << "Geben Sie den Pfad zum Simplex-File an:" << endl;
@@ -41,8 +46,8 @@ int main() {
 
                 if(eingabe == 'j')
                     minimum = true;
-
-                ifstream file(pathtosimplex); // loading of the text file from the path given by the user
+                // loading of the text file from the path given by the user
+                ifstream file(pathtosimplex);
                 // n - Variablen (Spalten) , k - Nebenbedingungen (Reihen)
                 if(file) {
                     int n,k;
@@ -96,8 +101,9 @@ int main() {
                     if (minimum) {
                         double** tempMatrice = new double*[n];
                         double** oldMatrice = matrice;
-                        for (int i = 0; i < n; ++i) { // naturally we need to transpose the old matrix first
-                            tempMatrice[i] = new double[k]; // the transpose process is done in this for loop
+                        // naturally we need to transpose the old matrix first
+                        for (int i = 0; i < n; ++i) {
+                            tempMatrice[i] = new double[k];
                             for(int j = 0; j < k; ++j)
                                 tempMatrice[i][j] = oldMatrice[j][i];
                         }
@@ -116,9 +122,11 @@ int main() {
                         minimum = false;
                     }
                     else
-                        solution = lpsolve( n, c, k, matrice, b); // call of the function that solves the optimization problem
+                        // call of the function that solves the optimization problem
+                        solution = lpsolve( n, c, k, matrice, b);
 
-                    cout << endl << "LOESUNGSWERTE:" << endl; // after the execution of lpsolve, the results are printed out into the console
+                    /// after the execution of lpsolve, the results are printed out into the console
+                    cout << endl << "LOESUNGSWERTE:" << endl;
                     for(int i = 0; i < n; ++i)
                         cout << "x" << i+1 << " = " << solution[i] << endl;
                     cout << "Optimaler ZF-Wert = " << solution[n] << endl;
@@ -137,7 +145,8 @@ int main() {
                     delete matrice;
                 }
                 else {
-                    cout << "Filereader Exception: Datei gibt es nicht!" << endl; // "if exception" - is true when the file variable doesn't have a valid filepath
+                    // "if exception" - file path check
+                    cout << "Filereader Exception: Datei gibt es nicht!" << endl;
                 }
             }
                 break;

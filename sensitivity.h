@@ -3,10 +3,13 @@
 //
 #include <iostream>
 #include "simplex.h"
+
 #ifndef SIMPLEX_SENSITIVITY_H
 #define SIMPLEX_SENSITIVITY_H
 
+using namespace std;
+
 void sensitivity(int n, double *c, int k, double **A, double *b);
-double findBound (double* solution, int cposition, double factor,int n, double *c, int k, double **A, double *b);
+double findBound (double* solution, int cposition, double factor, int n, double *c, int k, double **A, double *b);
 
 #endif //SIMPLEX_SENSITIVITY_H

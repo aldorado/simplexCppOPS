@@ -16,15 +16,15 @@ void sensitivity (int n, double *c, int k, double **A, double *b) {
 
     cout << endl << "Sensitivitaetsanalyse c-Vektor:" << endl;
     for (int i = 0; i < n; ++i)
-        cout << "c" << i << " = { " << lowerbounds[i] << ", " << upperbounds[i] << " }" << endl;
+        cout << "Intervall fuer c" << i << " = [ " << lowerbounds[i] << "; " << upperbounds[i] << " ]" << endl;
 
-    delete solution;
+    //delete solution;
 }
 
 double findBound (double* solution, int cposition, double factor, int n, double *c, int k, double **A, double *b) {
     bool samecorner = true;
     int counter = 0;
-    double* tempC = new double[n];
+    double* tempC = new double(n);
     double bound = 0;
 
     for (int j = 0; j < n; ++j)
@@ -43,7 +43,7 @@ double findBound (double* solution, int cposition, double factor, int n, double 
                     break;
                 }
 
-            delete tempSolution;
+            //delete tempSolution;
         }
         else {
             samecorner = false;
@@ -51,6 +51,8 @@ double findBound (double* solution, int cposition, double factor, int n, double 
 
 
     }
+
+    //delete tempC;
 
     return bound;
 }

@@ -8,6 +8,7 @@ Tableau::Tableau(int n, double *c, int k, double **A, double *b) {
 
     tableauColumns = n+k+1;
     tableauRows = k+1;
+    solutionArray = new double[n+1];
 
     //Erstellen des Tableaus
     tableauArray = new double*[tableauRows];
@@ -34,15 +35,16 @@ Tableau::Tableau(int n, double *c, int k, double **A, double *b) {
 /*
  * @~Tableau() deletes the allocated two dimensional array in our class
  */
+
 Tableau::~Tableau() {
-    for (int i = 0; i < tableauRows; ++i)
+   for (int i = 0; i < tableauRows; ++i)
         delete tableauArray[i];
 
     delete tableauArray;
 }
 
 /*
- * @checkOptimum() chcecks the tableau for the optimal state and returns
+ * @checkOptimum() checks the tableau for the optimal state and returns
  * a boolean (@optimum) value.
  * @min - variable used for comparison of elements in the last row (first row in our code)
  *
@@ -122,13 +124,12 @@ void Tableau::simplexStep() {
  */
 double* Tableau::solution() {
     int n = tableauColumns - tableauRows;
-    double* solution = new double(n+1);
     bool valid_solution = false;
 
     for(int i = 0; i < n+1; ++i)
-        solution[i] = 0;
+        solutionArray[i] = 0;
 
-    solution[n] = tableauArray[0][tableauColumns-1];
+    solutionArray[n] = tableauArray[0][tableauColumns-1];
 
     for (int i = 0; i < n; ++i) {
         int row = -1;
@@ -144,9 +145,10 @@ double* Tableau::solution() {
 
         cout << "" << endl;
         if(valid_solution)
-            solution[i] = tableauArray[row][tableauColumns-1];
+            solutionArray[i] = tableauArray[row][tableauColumns-1];
     }
-    return solution;
+
+    return solutionArray;
 }
 /*
  * @printTableau() prints the values of the tableau Array into the console

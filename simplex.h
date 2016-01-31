@@ -12,5 +12,5 @@ using namespace std;
  * */
 
 double* lpsolve(int n, double *c, int k, double **A, double *b);
-
+double* lpshadow(int n, double* c, int k, double** A, double* b);
 #endif //SIMPLEX_SIMPLEX_H

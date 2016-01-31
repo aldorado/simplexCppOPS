@@ -39,7 +39,10 @@ int main() {
                 cout << "Geben Sie den Pfad zum Simplex-File an:" << endl;
                 cin >> pathtosimplex; //file path input
                 minimum = false;
-                cout << "Handelt es sich um ein Minimumproblem? (j/n)" << endl;
+                cout << "Handelt es sich um ein Minimumproblem in der Form:" << endl
+                << "cTx -> min" << endl
+                << "Ax >= b" << endl
+                << "x >= 0" << endl << "(j/n)" << endl;
                 cin >> eingabe;
 
                 if(eingabe == 'j')

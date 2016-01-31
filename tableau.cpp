@@ -9,6 +9,7 @@ Tableau::Tableau(int n, double *c, int k, double **A, double *b) {
     tableauColumns = n+k+1;
     tableauRows = k+1;
     solutionArray = new double[n+1];
+    shadowArray = new double[k];
 
     //Erstellen des Tableaus
     tableauArray = new double*[tableauRows];
@@ -149,6 +150,13 @@ double* Tableau::solution() {
     }
 
     return solutionArray;
+}
+
+double* Tableau::shadowPrices() {
+    for(int i = 0; i < tableauRows - 1; ++i)
+        shadowArray[i] = tableauArray[0][i+tableauColumns-tableauRows];
+
+    return shadowArray;
 }
 /*
  * @printTableau() prints the values of the tableau Array into the console

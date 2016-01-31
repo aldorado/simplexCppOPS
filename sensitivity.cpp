@@ -14,11 +14,20 @@ void sensitivity (int n, double *c, int k, double **A, double *b) {
         upperbounds[i] = findBound(solution, i, 0.1, n, c, k, A, b);
     }
 
+
+    double* shadowArray = lpshadow(n,c,k,A,b);
+
+
+    cout << endl << "Sensitivitaetsanalyse Schattenpreise:" << endl;
+
+    for (int i = 0; i < k; ++i)
+        cout << "x" << i+n+1 << ": " << shadowArray[i] << endl;
+
     cout << endl << "Sensitivitaetsanalyse c-Vektor:" << endl;
     for (int i = 0; i < n; ++i)
-        cout << "Intervall fuer c" << i << " = [ " << lowerbounds[i] << "; " << upperbounds[i] << " ]" << endl;
+        cout << "Intervall fuer c" << i << ": [ " << lowerbounds[i] << "; " << upperbounds[i] << " ]" << endl;
 
-    //delete solution;
+    delete solution;
 }
 
 double findBound (double* solution, int cposition, double factor, int n, double *c, int k, double **A, double *b) {
